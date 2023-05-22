@@ -15,6 +15,19 @@ CORS(app)
 # create the jackson family object
 jackson_family = FamilyStructure("Jackson")
 
+# creo un objeto con los datos necesarios para ser añadido a la familia Jackson
+# ainhoa = {
+#     "first_name": "Ainhoa",
+#     "last_name": "jackson",
+#     "age": 29,
+#     "lucky_numbers": [1, 3, 5]
+# }
+
+# jackson_family.add_member(ainhoa)
+# for p in jackson_family.get_all_members():
+#     print(p)
+
+
 # Handle/serialize errors like a JSON object
 @app.errorhandler(APIException)
 def handle_invalid_usage(error):
@@ -41,4 +54,32 @@ def handle_hello():
 # this only runs if `$ python src/app.py` is executed
 if __name__ == '__main__':
     PORT = int(os.environ.get('PORT', 3000))
+    personas = [
+        {
+            "id": 1,
+            "first_name": "John",
+            "last_name": "Jackson",
+            "age": 33,
+            "lucky_numbers": [7, 13, 22]
+        },
+        {
+            "id": 2,
+            "first_name": "Jane",
+            "last_name": "Jackson",
+            "age": 35,
+            "lucky_numbers": [10, 14, 3]
+        },
+        {
+            "id": 3,
+            "first_name": "Jimmy",
+            "last_name": "Jackson",
+            "age": 5,
+            "lucky_numbers": [1]
+        }
+    ]
+
+    for p in personas:
+        jackson_family.add_member(p)
+    
+    # levantamos el servidor al final todo
     app.run(host='0.0.0.0', port=PORT, debug=True)
